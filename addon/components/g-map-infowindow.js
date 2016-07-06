@@ -43,6 +43,10 @@ const GMapInfowindowComponent = Ember.Component.extend({
     this.setOptions();
   },
 
+  didRender() {
+    this.open();
+  },
+
   willDestroyElement() {
     this.close();
 
@@ -87,6 +91,8 @@ const GMapInfowindowComponent = Ember.Component.extend({
   },
 
   open() {
+    if(this.isDestroyed) { return false; }
+
     const infowindow = this.get('infowindow');
     const map = this.get('map');
     const marker = this.get('marker');
